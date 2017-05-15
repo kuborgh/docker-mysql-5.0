@@ -8,7 +8,7 @@ if [ ! -d "/mysql/data/mysql" ]; then
 
     echo 'Initializing database'
     cd /mysql
-    scripts/mysql_install_db --user=kuborgh
+    scripts/mysql_install_db --user=mysql
     echo 'Database initialized'
 
     rootCreate=
@@ -24,7 +24,7 @@ EOSQL
 
     # Start daemon for init purpose
     echo 'Starting server to setup users'
-    "bin/mysqld" --skip-networking --basedir=/mysql --datadir=/mysql/data --user=kuborgh &
+    "bin/mysqld" --skip-networking --basedir=/mysql --datadir=/mysql/data --user=mysql &
     pid="$!"
     mysql=( bin/mysql -uroot )
 
