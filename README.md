@@ -28,3 +28,15 @@ services:
 ```
 
 *NOTE*: It's hardly recommended to add the data folder to your .dockerignore file. Otherwise your whole database is sent to the docker daemon upon building the image.
+
+It's recommended to use your own user mapping, by creating a project-specific layer looking like this. This will consume the `uid` and `gid` from the `docker-compose.yml` upon build.
+```Dockerfile
+FROM kuborgh/mysql-5.0
+
+ARG uid=1001
+ARG gid=1001
+
+# ensure user exists
+RUN addgroup --gid $gid --system mysql \
+	&& adduser --uid $uid --disabled-password --system --gid $gid mysql
+```
