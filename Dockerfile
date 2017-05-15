@@ -1,12 +1,5 @@
 FROM ubuntu:12.04
 
-ARG uid=1000
-ARG gid=1000
-
-# ensure user exists
-RUN addgroup --gid $gid --system mysql \
-	&& adduser --uid $uid --disabled-password --system --gid $gid mysql
-
 RUN apt-get update &&\
     apt-get -y --no-install-recommends install ca-certificates wget && \
     wget https://downloads.mysql.com/archives/get/file/mysql-5.0.96-linux-x86_64-glibc23.tar.gz -O mysql.tar.gz && \
